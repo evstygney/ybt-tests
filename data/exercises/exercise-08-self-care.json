@@ -1,0 +1,63 @@
+{
+  "id": "exercise_08",
+  "slug": "self-care-map",
+  "title": "Self-care Map",
+  "goal": "Собрать персональную карту восстановления и антисрыв-план.",
+  "week": 3,
+  "target_skill": "self-care",
+  "ybt_focus": ["Я"],
+  "duration_min": 6,
+  "mode": "canvas",
+  "badge": "Опора под рукой",
+  "level": "наблюдаю",
+  "summary": "Четыре сектора: быстрые ресурсы, долгие ресурсы, красные флажки, поддержка.",
+  "steps": [
+    {
+      "id": "resources_fast",
+      "kind": "text",
+      "title": "Быстрые ресурсы",
+      "placeholder": "Что помогает восстановиться за 5-15 минут?"
+    },
+    {
+      "id": "resources_long",
+      "kind": "text",
+      "title": "Долгие ресурсы",
+      "placeholder": "Что стабилизирует вас на горизонте недели?"
+    },
+    {
+      "id": "red_flags",
+      "kind": "text",
+      "title": "Красные флажки",
+      "placeholder": "Какие сигналы говорят, что вы входите в перегруз?"
+    },
+    {
+      "id": "support",
+      "kind": "text",
+      "title": "Поддержка",
+      "placeholder": "К кому и как вы обращаетесь за поддержкой?"
+    }
+  ],
+  "content": {
+    "intro": "Заполните четыре сектора и соберите антисрыв-план, который можно сохранить.",
+    "exportTemplate": "Быстрые ресурсы: ...; Долгие ресурсы: ...; Красные флажки: ...; Поддержка: ..."
+  },
+  "scoring": {
+    "base_points": 40,
+    "bonus_points": 20,
+    "penalty_points": 0
+  },
+  "feedback_rules": [
+    {
+      "id": "map-complete",
+      "title": "Карта собрана",
+      "predicate": "answeredCount>3",
+      "message": "У вас уже есть набор быстрых и длинных опор.",
+      "recommendation": "Сохраните карту и покажите одному человеку, который может поддержать."
+    }
+  ],
+  "reflection_prompt": "Что из этой карты вы включите в жизнь в ближайшие 48 часов?",
+  "admin_editable_fields": ["steps", "content.exportTemplate", "feedback_rules"],
+  "recommendation_48h": "Выберите один быстрый ресурс и один контакт поддержки, которыми реально воспользуетесь.",
+  "micro_experiment_prompt": "Протестируйте свой антисрыв-план на первой же неделе перегруза, а не в момент выгорания.",
+  "week_theme": "Восстановление и опора"
+}

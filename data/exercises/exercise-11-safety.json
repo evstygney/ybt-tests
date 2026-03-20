@@ -1,0 +1,72 @@
+{
+  "id": "exercise_11",
+  "slug": "psychological-safety-rituals",
+  "title": "Ритуалы психологической безопасности",
+  "goal": "Помочь собрать набор ритуалов безопасной коммуникации для команды.",
+  "week": 4,
+  "target_skill": "team-safety",
+  "ybt_focus": ["Команда", "Бизнес"],
+  "duration_min": 6,
+  "mode": "builder",
+  "badge": "Безопасная рамка",
+  "level": "веду других",
+  "summary": "Контекст команды, боли и пакет из 3-5 ритуалов с хартией.",
+  "steps": [
+    {
+      "id": "context",
+      "kind": "singleChoice",
+      "title": "Какой контекст команды?",
+      "options": [
+        { "id": "distributed", "label": "Распределённая команда", "score": 8 },
+        { "id": "fast-growth", "label": "Быстро растущая команда", "score": 9 },
+        { "id": "cross-functional", "label": "Межфункциональная команда", "score": 10 }
+      ]
+    },
+    {
+      "id": "pain",
+      "kind": "multiChoice",
+      "title": "Где больше всего напряжения?",
+      "minSelections": 1,
+      "maxSelections": 3,
+      "options": [
+        { "id": "feedback", "label": "Обратная связь звучит резко", "score": 8 },
+        { "id": "help", "label": "Сложно просить о помощи", "score": 8 },
+        { "id": "mistakes", "label": "Ошибки обсуждают обвинительно", "score": 9 }
+      ]
+    },
+    {
+      "id": "rituals",
+      "kind": "builder",
+      "title": "Соберите пакет ритуалов",
+      "template": [
+        "Старт встречи с check-in",
+        "Ясный запрос помощи",
+        "Нормализация ошибок через короткий разбор",
+        "Регулярная обратная связь по правилам"
+      ]
+    }
+  ],
+  "content": {
+    "intro": "Конструктор предлагает ритуалы и собирает командную хартию 1.0.",
+    "ritualSet": ["check-in", "ask-for-help", "retrospective", "feedback-agreement"]
+  },
+  "scoring": {
+    "base_points": 50,
+    "bonus_points": 20,
+    "penalty_points": 0
+  },
+  "feedback_rules": [
+    {
+      "id": "safety-pack",
+      "title": "Набор целостный",
+      "predicate": "answeredCount>2",
+      "message": "В наборе есть старт, запрос помощи, работа с ошибками и обратная связь.",
+      "recommendation": "Не внедряйте всё сразу: начните с одного ритуала и одного правила фиксации."
+    }
+  ],
+  "reflection_prompt": "Какой ритуал вы сможете предложить команде уже в ближайшие 48 часов?",
+  "admin_editable_fields": ["steps", "content.ritualSet", "feedback_rules", "badge"],
+  "recommendation_48h": "Запустите один ритуал безопасной коммуникации на ближайшей командной встрече.",
+  "micro_experiment_prompt": "В течение недели протестируйте один ритуал и соберите обратную связь команды о его полезности.",
+  "week_theme": "Психологическая безопасность"
+}

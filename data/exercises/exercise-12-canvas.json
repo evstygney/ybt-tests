@@ -1,0 +1,72 @@
+{
+  "id": "exercise_12",
+  "slug": "team-canvas-lite",
+  "title": "Team Canvas Lite",
+  "goal": "Дать облегчённый цифровой canvas для соло-рефлексии или командной сессии.",
+  "week": 4,
+  "target_skill": "team-alignment",
+  "ybt_focus": ["Команда", "Бизнес"],
+  "duration_min": 8,
+  "mode": "canvas",
+  "badge": "Архитектор договорённостей",
+  "level": "веду других",
+  "summary": "Solo reflection или team workshop по ключевым блокам команды.",
+  "steps": [
+    {
+      "id": "mode",
+      "kind": "singleChoice",
+      "title": "Выберите режим",
+      "options": [
+        { "id": "solo", "label": "Solo reflection", "score": 5 },
+        { "id": "team", "label": "Team workshop", "score": 5 }
+      ]
+    },
+    {
+      "id": "purpose",
+      "kind": "text",
+      "title": "Зачем мы существуем?",
+      "placeholder": "Коротко сформулируйте смысл и ценность команды."
+    },
+    {
+      "id": "ways",
+      "kind": "text",
+      "title": "Как мы работаем?",
+      "placeholder": "Принципы, ритмы, договорённости."
+    },
+    {
+      "id": "friction",
+      "kind": "text",
+      "title": "Что нас тормозит?",
+      "placeholder": "Основные friction points."
+    },
+    {
+      "id": "protect",
+      "kind": "text",
+      "title": "Что важно не потерять?",
+      "placeholder": "Что составляет сильную часть команды?"
+    }
+  ],
+  "content": {
+    "intro": "Лёгкий canvas для работы в одиночку или с командой. На выходе — HTML-версия для сохранения и обсуждения.",
+    "exportTemplate": "<section><h1>Team Canvas Lite</h1><p>Purpose: ...</p><p>Ways: ...</p><p>Friction: ...</p><p>Protect: ...</p></section>"
+  },
+  "scoring": {
+    "base_points": 40,
+    "bonus_points": 20,
+    "penalty_points": 0
+  },
+  "feedback_rules": [
+    {
+      "id": "canvas-complete",
+      "title": "Canvas готов к обсуждению",
+      "predicate": "answeredCount>4",
+      "message": "У вас уже есть база для командного разговора, а не набор абстракций.",
+      "recommendation": "Используйте этот canvas как pre-read перед ближайшей рабочей сессией."
+    }
+  ],
+  "reflection_prompt": "Где и с кем вы примените этот canvas в ближайшие 48 часов?",
+  "admin_editable_fields": ["steps", "content.exportTemplate", "feedback_rules", "title"],
+  "recommendation_48h": "Поделитесь canvas с одной ключевой фигурой команды и попросите дополнить один блок.",
+  "micro_experiment_prompt": "На этой неделе проведите 20-минутную сессию по одному блоку canvas вместо попытки решить всё сразу.",
+  "week_theme": "Командная согласованность"
+}

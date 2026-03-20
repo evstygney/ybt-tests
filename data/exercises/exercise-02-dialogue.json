@@ -1,0 +1,75 @@
+{
+  "id": "exercise_02",
+  "slug": "difficult-dialogue-simulator",
+  "title": "Симулятор сложного диалога",
+  "goal": "Потренировать конструктивную коммуникацию в напряжённом рабочем разговоре.",
+  "week": 1,
+  "target_skill": "communication",
+  "ybt_focus": ["Бизнес", "Команда"],
+  "duration_min": 7,
+  "mode": "simulation",
+  "badge": "Чистая реплика",
+  "level": "пробую",
+  "summary": "Сценарный симулятор с вариантами реплик и профилем поведения.",
+  "steps": [
+    {
+      "id": "opening",
+      "kind": "singleChoice",
+      "title": "Коллега сорвал срок и пишет: «Я не успеваю, давай перенесём ещё на неделю». Как откроете диалог?",
+      "options": [
+        { "id": "hard", "label": "Это неприемлемо. Исправь сегодня же.", "score": 2, "metricEffects": { "clarity": 2, "respect": -2, "escalation": 3 } },
+        { "id": "balanced", "label": "Давай быстро разберём, что именно мешает и что можно стабилизировать сегодня.", "score": 10, "metricEffects": { "clarity": 3, "respect": 3, "task_focus": 3, "escalation": -1 } },
+        { "id": "vague", "label": "Ну ладно, посмотрим потом.", "score": 1, "metricEffects": { "clarity": -2, "respect": 1, "task_focus": -3 } }
+      ]
+    },
+    {
+      "id": "assembly",
+      "kind": "builder",
+      "title": "Соберите зрелый ответ из смысловых блоков",
+      "template": [
+        "Зафиксировать влияние на задачу",
+        "Уточнить причину срыва",
+        "Договориться о следующем шаге и владельце"
+      ]
+    },
+    {
+      "id": "closing",
+      "kind": "singleChoice",
+      "title": "Чем завершите разговор?",
+      "options": [
+        { "id": "owner", "label": "До 16:00 пришли обновлённый план с рисками и предложением по поддержке.", "score": 10, "metricEffects": { "clarity": 3, "task_focus": 3 } },
+        { "id": "pressure", "label": "Ещё один срыв и вернёмся к твоей роли.", "score": 2, "metricEffects": { "respect": -3, "escalation": 4 } },
+        { "id": "blur", "label": "Давай просто держать связь.", "score": 1, "metricEffects": { "clarity": -3 } }
+      ]
+    }
+  ],
+  "content": {
+    "intro": "Два режима: выбор лучшей реплики и сбор ответа из смысловых блоков.",
+    "metrics": ["clarity", "respect", "task_focus", "escalation"]
+  },
+  "scoring": {
+    "base_points": 50,
+    "bonus_points": 25,
+    "penalty_points": 5,
+    "metricWeights": {
+      "clarity": 3,
+      "respect": 3,
+      "task_focus": 3,
+      "escalation": -2
+    }
+  },
+  "feedback_rules": [
+    {
+      "id": "balanced-profile",
+      "title": "Сильный баланс",
+      "predicate": "metric:respect>1",
+      "message": "Вы удерживаете и задачу, и уважение к собеседнику.",
+      "recommendation": "В реальном разговоре добавьте ещё один короткий check-back вопрос."
+    }
+  ],
+  "reflection_prompt": "Где в ближайшие 48 часов вам пригодится более ясная и уважительная реплика?",
+  "admin_editable_fields": ["steps", "content.metrics", "scoring.metricWeights", "feedback_rules"],
+  "recommendation_48h": "Найдите один сложный диалог и заранее подготовьте стартовую фразу на 12–15 слов.",
+  "micro_experiment_prompt": "На этой неделе минимум один раз завершите сложный разговор явным следующим шагом и owner.",
+  "week_theme": "Коммуникация без эскалации"
+}

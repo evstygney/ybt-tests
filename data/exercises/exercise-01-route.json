@@ -1,0 +1,97 @@
+{
+  "id": "exercise_01",
+  "slug": "soft-skills-route",
+  "title": "Маршрут развития soft skills",
+  "goal": "Определить приоритетный soft skill и собрать микроцель на 7 дней.",
+  "week": 1,
+  "target_skill": "self-leadership",
+  "ybt_focus": ["Я", "Бизнес"],
+  "duration_min": 6,
+  "mode": "builder",
+  "badge": "Фокус недели",
+  "level": "наблюдаю",
+  "summary": "Короткий мастер с рабочим контекстом и недельной микроцелью.",
+  "steps": [
+    {
+      "id": "role",
+      "kind": "singleChoice",
+      "title": "Какая у вас роль?",
+      "options": [
+        { "id": "ic", "label": "Individual Contributor", "score": 5, "tags": ["focus"] },
+        { "id": "lead", "label": "Team Lead", "score": 7, "tags": ["leadership"] },
+        { "id": "pm", "label": "Product / Project", "score": 6, "tags": ["alignment"] }
+      ]
+    },
+    {
+      "id": "pain_points",
+      "kind": "multiChoice",
+      "title": "Что сейчас мешает сильнее всего?",
+      "minSelections": 1,
+      "maxSelections": 3,
+      "options": [
+        { "id": "priority", "label": "Сложно держать приоритет", "score": 8, "tags": ["self-management"] },
+        { "id": "dialogue", "label": "Тяжёлые разговоры тянут энергию", "score": 9, "tags": ["communication"] },
+        { "id": "noise", "label": "Слишком много шума и встреч", "score": 7, "tags": ["focus"] }
+      ]
+    },
+    {
+      "id": "priority_skill",
+      "kind": "singleChoice",
+      "title": "На какой навык ставите фокус?",
+      "options": [
+        { "id": "communication", "label": "Конструктивная коммуникация", "score": 10 },
+        { "id": "boundaries", "label": "Границы и приоритизация", "score": 10 },
+        { "id": "conflict", "label": "Зрелое разрешение конфликтов", "score": 10 }
+      ]
+    },
+    {
+      "id": "micro_goal",
+      "kind": "text",
+      "title": "Сформулируйте микроцель на 7 дней",
+      "placeholder": "Например: На каждой статус-встрече буду завершать разговор явным owner и сроком."
+    },
+    {
+      "id": "deadline_strength",
+      "kind": "rating",
+      "title": "Насколько цель привязана к рабочему контексту и сроку?",
+      "options": [
+        { "id": "1", "label": "1", "score": 1 },
+        { "id": "2", "label": "2", "score": 2 },
+        { "id": "3", "label": "3", "score": 3 },
+        { "id": "4", "label": "4", "score": 4 },
+        { "id": "5", "label": "5", "score": 5 }
+      ]
+    }
+  ],
+  "content": {
+    "intro": "Выберите роль, основную боль и соберите реалистичную цель на ближайшую неделю.",
+    "outro": "На финальном экране пользователь видит риск-зону, навык и первый шаг."
+  },
+  "scoring": {
+    "base_points": 50,
+    "bonus_points": 20,
+    "penalty_points": 0,
+    "completion_bonus": 10
+  },
+  "feedback_rules": [
+    {
+      "id": "specific-goal",
+      "title": "Цель достаточно конкретна",
+      "predicate": "textLength:micro_goal>70",
+      "message": "Цель уже звучит как поведение, а не как намерение.",
+      "recommendation": "Привяжите её к одной реальной встрече или типу диалога."
+    },
+    {
+      "id": "goal-too-broad",
+      "title": "Цель стоит сузить",
+      "predicate": "textLength:micro_goal<45",
+      "message": "Пока формулировка слишком широкая и рискует не перейти в действие.",
+      "recommendation": "Добавьте рабочую ситуацию, частоту и ожидаемый результат."
+    }
+  ],
+  "reflection_prompt": "Где вы примените этот маршрут в ближайшие 48 часов?",
+  "admin_editable_fields": ["title", "goal", "steps", "content", "scoring", "feedback_rules", "badge"],
+  "recommendation_48h": "Назначьте одну рабочую ситуацию на ближайшие два дня, где протестируете новый навык.",
+  "micro_experiment_prompt": "Сформируйте один микроэксперимент на 7 дней и опишите критерий успеха.",
+  "week_theme": "Личный ресурс и приоритет"
+}

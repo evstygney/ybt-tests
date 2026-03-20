@@ -1,0 +1,67 @@
+{
+  "id": "exercise_07",
+  "slug": "stop-doing-list",
+  "title": "Stop-Doing List",
+  "goal": "Снизить перегруз через осознанный отказ, делегирование и автоматизацию.",
+  "week": 3,
+  "target_skill": "prioritization",
+  "ybt_focus": ["Я", "Бизнес"],
+  "duration_min": 5,
+  "mode": "builder",
+  "badge": "Антиперегруз",
+  "level": "пробую",
+  "summary": "Пользователь отмечает активности и получает недельный антиперегрузочный план.",
+  "steps": [
+    {
+      "id": "activities",
+      "kind": "multiChoice",
+      "title": "Что из этого уже пора пересмотреть?",
+      "minSelections": 1,
+      "maxSelections": 4,
+      "options": [
+        { "id": "manual_report", "label": "Ручной отчёт, который можно автоматизировать", "score": 10 },
+        { "id": "status_meeting", "label": "Регулярная встреча без решений", "score": 9 },
+        { "id": "ad_hoc_requests", "label": "Незапланированные просьбы без фильтра", "score": 8 },
+        { "id": "duplicate_updates", "label": "Дублирование апдейтов в нескольких каналах", "score": 9 }
+      ]
+    },
+    {
+      "id": "status",
+      "kind": "singleChoice",
+      "title": "Какая основная стратегия на эту неделю?",
+      "options": [
+        { "id": "stop", "label": "Прекратить", "score": 10 },
+        { "id": "delegate", "label": "Делегировать", "score": 8 },
+        { "id": "automate", "label": "Автоматизировать", "score": 9 }
+      ]
+    },
+    {
+      "id": "plan",
+      "kind": "text",
+      "title": "Опишите план на неделю",
+      "placeholder": "Что именно убираете, кому сообщаете, какой результат ждёте."
+    }
+  ],
+  "content": {
+    "intro": "На выходе пользователь получает текст для Notion/Telegram и экспортную карточку."
+  },
+  "scoring": {
+    "base_points": 45,
+    "bonus_points": 20,
+    "penalty_points": 0
+  },
+  "feedback_rules": [
+    {
+      "id": "plan-ready",
+      "title": "План достаточно конкретен",
+      "predicate": "textLength:plan>60",
+      "message": "Вы уже описали действие, коммуникацию и ожидаемый эффект.",
+      "recommendation": "Сразу назначьте дату проверки результата через 7 дней."
+    }
+  ],
+  "reflection_prompt": "Что вы перестанете делать уже в ближайшие 48 часов?",
+  "admin_editable_fields": ["steps", "content", "feedback_rules", "badge"],
+  "recommendation_48h": "Выберите один повторяющийся процесс и либо остановите его, либо передайте в другой формат.",
+  "micro_experiment_prompt": "В течение недели измерьте, сколько времени освободил один stop-doing шаг.",
+  "week_theme": "Приоритизация и перегруз"
+}

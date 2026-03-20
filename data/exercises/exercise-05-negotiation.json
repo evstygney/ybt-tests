@@ -1,0 +1,75 @@
+{
+  "id": "exercise_05",
+  "slug": "negotiation-without-escalation",
+  "title": "Симулятор переговоров без эскалации",
+  "goal": "Показать, как формулировки меняют доверие, напряжение, ясность и движение к решению.",
+  "week": 2,
+  "target_skill": "negotiation",
+  "ybt_focus": ["Бизнес", "Команда"],
+  "duration_min": 7,
+  "mode": "simulation",
+  "badge": "Удерживаю рамку",
+  "level": "применяю",
+  "summary": "Мини-переговоры на 4-6 ходов с состояниями trust, tension, clarity, progress.",
+  "steps": [
+    {
+      "id": "move_1",
+      "kind": "singleChoice",
+      "title": "Старт переговоров",
+      "options": [
+        { "id": "frame", "label": "Сначала выровняем цель, ограничения и желаемый результат для обеих сторон.", "score": 10, "metricEffects": { "trust": 2, "tension": -1, "clarity": 3, "progress": 2 } },
+        { "id": "push", "label": "Нам нужно ваше согласие, иначе пойдём выше.", "score": 2, "metricEffects": { "trust": -2, "tension": 3, "clarity": 1, "progress": 0 } },
+        { "id": "soft", "label": "Ну, скажите, что вы вообще думаете.", "score": 3, "metricEffects": { "trust": 1, "clarity": -2, "progress": -1 } }
+      ]
+    },
+    {
+      "id": "move_2",
+      "kind": "singleChoice",
+      "title": "Появилось сопротивление. Что дальше?",
+      "options": [
+        { "id": "interests", "label": "Уточнить интересы и предложить 2 компромиссных сценария.", "score": 10, "metricEffects": { "trust": 2, "tension": -1, "clarity": 2, "progress": 3 } },
+        { "id": "repeat", "label": "Ещё раз жёстко повторить свою позицию.", "score": 2, "metricEffects": { "trust": -2, "tension": 3, "progress": -1 } },
+        { "id": "pause", "label": "Свернуть разговор без следующего шага.", "score": 1, "metricEffects": { "clarity": -2, "progress": -2 } }
+      ]
+    },
+    {
+      "id": "move_3",
+      "kind": "singleChoice",
+      "title": "Финальный ход",
+      "options": [
+        { "id": "close", "label": "Зафиксировать решение, риски и owner'ов проверки.", "score": 10, "metricEffects": { "trust": 1, "clarity": 3, "progress": 3 } },
+        { "id": "threat", "label": "Подчеркнуть последствия отказа.", "score": 2, "metricEffects": { "trust": -3, "tension": 4 } },
+        { "id": "blur", "label": "Оставить всё открытым до следующего раза.", "score": 1, "metricEffects": { "clarity": -3, "progress": -2 } }
+      ]
+    }
+  ],
+  "content": {
+    "intro": "Итог зависит от комбинации шкал, а не от одной «правильной» реплики.",
+    "metrics": ["trust", "tension", "clarity", "progress"]
+  },
+  "scoring": {
+    "base_points": 50,
+    "bonus_points": 25,
+    "penalty_points": 5,
+    "metricWeights": {
+      "trust": 3,
+      "tension": -2,
+      "clarity": 3,
+      "progress": 4
+    }
+  },
+  "feedback_rules": [
+    {
+      "id": "deal-strong",
+      "title": "Переговоры удержаны",
+      "predicate": "metric:progress>3",
+      "message": "Вы двигаете разговор к решению без лишней эскалации.",
+      "recommendation": "Используйте ту же рамку в следующем межфункциональном диалоге."
+    }
+  ],
+  "reflection_prompt": "В каком разговоре ближайших 48 часов вам пригодится больше ясности и меньше напряжения?",
+  "admin_editable_fields": ["steps", "content.metrics", "scoring.metricWeights", "feedback_rules"],
+  "recommendation_48h": "Перед ближайшими переговорами подготовьте рамку: цель, ограничения, варианты, owner'ы проверки.",
+  "micro_experiment_prompt": "Один разговор на этой неделе проведите через интересы сторон и 2 сценария, а не через давление.",
+  "week_theme": "Переговоры и доверие"
+}

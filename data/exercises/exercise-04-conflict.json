@@ -1,0 +1,68 @@
+{
+  "id": "exercise_04",
+  "slug": "conflict-radar",
+  "title": "Конфликт-радар",
+  "goal": "Научить распознавать тип конфликта, причину и зрелый первый шаг.",
+  "week": 2,
+  "target_skill": "conflict-management",
+  "ybt_focus": ["Я", "Команда"],
+  "duration_min": 6,
+  "mode": "quiz",
+  "badge": "Радар зрелости",
+  "level": "пробую",
+  "summary": "Case-based quiz с разбором стратегии и первой реплики.",
+  "steps": [
+    {
+      "id": "type",
+      "kind": "singleChoice",
+      "title": "Какой это тип конфликта?",
+      "options": [
+        { "id": "task", "label": "Конфликт задач и приоритетов", "score": 10 },
+        { "id": "relationship", "label": "Личностный конфликт", "score": 4 },
+        { "id": "value", "label": "Конфликт ценностей", "score": 6 }
+      ]
+    },
+    {
+      "id": "cause",
+      "kind": "singleChoice",
+      "title": "Что выглядит как корневая причина?",
+      "options": [
+        { "id": "unclear_owners", "label": "Неясные owner'ы и ожидания", "score": 10 },
+        { "id": "bad_people", "label": "Люди просто не совпали характерами", "score": 2 },
+        { "id": "deadline", "label": "Только жёсткий дедлайн", "score": 5 }
+      ]
+    },
+    {
+      "id": "first_step",
+      "kind": "singleChoice",
+      "title": "Какой первый шаг зрелее?",
+      "options": [
+        { "id": "triage", "label": "Собрать факты, уточнить влияние и договориться о коротком совместном разборе", "score": 10 },
+        { "id": "avoid", "label": "Ничего не делать и ждать, пока утихнет", "score": 1 },
+        { "id": "escalate", "label": "Сразу эскалировать руководителю без разговора", "score": 4 }
+      ]
+    }
+  ],
+  "content": {
+    "intro": "Кейс: две команды спорят о приоритете релизной задачи, встречи стали резкими, владельцы не закреплены."
+  },
+  "scoring": {
+    "base_points": 50,
+    "bonus_points": 15,
+    "penalty_points": 0
+  },
+  "feedback_rules": [
+    {
+      "id": "strategy-strong",
+      "title": "Зрелая стратегия",
+      "predicate": "score>58",
+      "message": "Вы отделяете факты от эмоций и сразу ищете рабочий первый шаг.",
+      "recommendation": "Подготовьте первую реплику в формате: факт, влияние, приглашение к совместному решению."
+    }
+  ],
+  "reflection_prompt": "Где в ближайшие 48 часов вам важно различить тип конфликта до того, как реагировать?",
+  "admin_editable_fields": ["steps", "content", "feedback_rules", "scoring"],
+  "recommendation_48h": "В следующем напряжённом кейсе сначала назовите тип конфликта и только потом выбирайте ответ.",
+  "micro_experiment_prompt": "Один раз на этой неделе начните сложный разговор с выравнивания фактов и owner'ов.",
+  "week_theme": "Конфликты и зрелая реакция"
+}

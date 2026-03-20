@@ -1,0 +1,69 @@
+{
+  "id": "exercise_06",
+  "slug": "energy-budget",
+  "title": "Energy Budget",
+  "goal": "Помочь увидеть источники потери энергии и выбрать, что сократить, а что защищать.",
+  "week": 3,
+  "target_skill": "energy-management",
+  "ybt_focus": ["Я", "Бизнес"],
+  "duration_min": 6,
+  "mode": "builder",
+  "badge": "Берегу ресурс",
+  "level": "наблюдаю",
+  "summary": "Конструктор недели: активность, зона, анализ и персональная рекомендация.",
+  "steps": [
+    {
+      "id": "drainers",
+      "kind": "multiChoice",
+      "title": "Что сильнее всего съедает энергию?",
+      "minSelections": 1,
+      "maxSelections": 4,
+      "options": [
+        { "id": "context_switch", "label": "Частые переключения контекста", "score": 8 },
+        { "id": "late_calls", "label": "Поздние встречи", "score": 7 },
+        { "id": "unclear_tasks", "label": "Неясные ожидания", "score": 9 },
+        { "id": "urgent_chat", "label": "Поток срочных сообщений", "score": 8 }
+      ]
+    },
+    {
+      "id": "protect",
+      "kind": "multiChoice",
+      "title": "Что важно защищать как ресурс?",
+      "minSelections": 1,
+      "maxSelections": 3,
+      "options": [
+        { "id": "focus_block", "label": "2 часа глубокого фокуса", "score": 10 },
+        { "id": "walk", "label": "Короткая прогулка или пауза без экрана", "score": 8 },
+        { "id": "one_on_one", "label": "Качественный 1:1 с ключевым коллегой", "score": 7 }
+      ]
+    },
+    {
+      "id": "stop_doing",
+      "kind": "text",
+      "title": "Что вы готовы сократить уже на этой неделе?",
+      "placeholder": "Например: отменю одну встречу без решения и уберу два лишних статуса."
+    }
+  ],
+  "content": {
+    "intro": "Пользователь собирает карту энергопотерь и выбирает одно stop-doing действие."
+  },
+  "scoring": {
+    "base_points": 45,
+    "bonus_points": 15,
+    "penalty_points": 0
+  },
+  "feedback_rules": [
+    {
+      "id": "energy-complete",
+      "title": "Карта достаточно полная",
+      "predicate": "score>52",
+      "message": "Вы не только назвали потери, но и обозначили, что будете защищать.",
+      "recommendation": "Сделайте один разговор о границах и один stop-doing шаг в календаре."
+    }
+  ],
+  "reflection_prompt": "Какой источник энергопотерь вы реально уменьшите в ближайшие 48 часов?",
+  "admin_editable_fields": ["steps", "feedback_rules", "recommendation_48h", "micro_experiment_prompt"],
+  "recommendation_48h": "Снимите хотя бы один повторяющийся источник перегруза в течение ближайших двух дней.",
+  "micro_experiment_prompt": "Защитите один ресурсный слот в календаре и сообщите команде, зачем он нужен.",
+  "week_theme": "Ресурс и устойчивость"
+}

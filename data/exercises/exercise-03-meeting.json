@@ -1,0 +1,71 @@
+{
+  "id": "exercise_03",
+  "slug": "meeting-focus-builder",
+  "title": "Конструктор встречи с фокусом на цель",
+  "goal": "Научить собирать встречу так, чтобы у неё была цель, результат и ответственные.",
+  "week": 1,
+  "target_skill": "facilitation",
+  "ybt_focus": ["Бизнес", "Команда"],
+  "duration_min": 5,
+  "mode": "builder",
+  "badge": "Ведущий структуры",
+  "level": "пробую",
+  "summary": "Кейс на цель встречи, порядок повестки и follow-up.",
+  "steps": [
+    {
+      "id": "goal",
+      "kind": "singleChoice",
+      "title": "Выберите цель встречи",
+      "options": [
+        { "id": "status", "label": "Просто обсудить всё, что накопилось", "score": 1 },
+        { "id": "decision", "label": "Принять решение по релизному риску и зафиксировать owner'ов", "score": 10 },
+        { "id": "sync", "label": "Сделать дружеский синк без конкретного итога", "score": 2 }
+      ]
+    },
+    {
+      "id": "agenda",
+      "kind": "sort",
+      "title": "Расставьте повестку в зрелом порядке",
+      "options": [
+        { "id": "context", "label": "Контекст и цель встречи", "score": 3 },
+        { "id": "facts", "label": "Факты и ограничения", "score": 3 },
+        { "id": "decision", "label": "Решение и критерии", "score": 3 },
+        { "id": "owners", "label": "Owner'ы, сроки и follow-up", "score": 3 }
+      ]
+    },
+    {
+      "id": "follow-up",
+      "kind": "builder",
+      "title": "Соберите follow-up шаблон",
+      "template": [
+        "Что решили",
+        "Кто отвечает",
+        "До какого срока",
+        "Как проверяем результат"
+      ]
+    }
+  ],
+  "content": {
+    "intro": "Пользователь получает кейс релизной встречи и собирает её как рабочий инструмент.",
+    "exportTemplate": "Цель: {goal}; Решили: ...; Owner'ы: ...; Следующая точка контроля: ..."
+  },
+  "scoring": {
+    "base_points": 45,
+    "bonus_points": 20,
+    "penalty_points": 0
+  },
+  "feedback_rules": [
+    {
+      "id": "meeting-strong",
+      "title": "Структура собрана качественно",
+      "predicate": "score>60",
+      "message": "У встречи появился результат, а не просто обсуждение.",
+      "recommendation": "Примените этот шаблон к ближайшей рабочей синхронизации."
+    }
+  ],
+  "reflection_prompt": "Какую встречу вы сможете сократить или усилить уже в ближайшие 48 часов?",
+  "admin_editable_fields": ["steps", "content.exportTemplate", "feedback_rules", "badge"],
+  "recommendation_48h": "Перед следующей встречей заранее сформулируйте цель в формате результата и owner'ов.",
+  "micro_experiment_prompt": "На одной встрече этой недели завершите разговор follow-up сообщением в течение 10 минут.",
+  "week_theme": "Фасилитация и ясность"
+}
