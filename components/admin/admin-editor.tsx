@@ -35,7 +35,9 @@ export function AdminEditor({ slug }: AdminEditorProps) {
     );
   }
 
-  const validation = validateExerciseConfig(config);
+  const currentConfig = config;
+
+  const validation = validateExerciseConfig(currentConfig);
 
   function saveCurrent(nextConfig: ExerciseConfig) {
     setConfig(nextConfig);
@@ -45,12 +47,12 @@ export function AdminEditor({ slug }: AdminEditorProps) {
   }
 
   function duplicateTemplate() {
-    const copySlug = `${config.slug}-copy`;
+    const copySlug = `${currentConfig.slug}-copy`;
     const copy = {
-      ...config,
-      id: `${config.id}_copy`,
+      ...currentConfig,
+      id: `${currentConfig.id}_copy`,
       slug: copySlug,
-      title: `${config.title} (копия)`
+      title: `${currentConfig.title} (копия)`
     };
     saveCurrent(copy);
     setStatus(`Создана копия ${copySlug}.`);
@@ -61,13 +63,13 @@ export function AdminEditor({ slug }: AdminEditorProps) {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.22em] text-pine/70">Admin editor</p>
-          <h1 className="mt-3 text-4xl font-serif text-ink">{config.title}</h1>
+          <h1 className="mt-3 text-4xl font-serif text-ink">{currentConfig.title}</h1>
         </div>
         <div className="flex flex-wrap gap-3">
           <Link href="/admin" className="rounded-full border border-ink/10 px-5 py-3 text-sm font-semibold text-ink">
             К списку
           </Link>
-          <Link href={`/exercise/${config.slug}`} className="rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white">
+          <Link href={`/exercise/${currentConfig.slug}`} className="rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white">
             Открыть модуль
           </Link>
         </div>
@@ -79,35 +81,35 @@ export function AdminEditor({ slug }: AdminEditorProps) {
           <div className="mt-5 grid gap-4">
             <label className="grid gap-2">
               <span className="text-sm text-ink/64">Название</span>
-              <input value={config.title} onChange={(event) => setConfig({ ...config, title: event.target.value })} className="rounded-2xl border border-ink/10 px-4 py-3" />
+              <input value={currentConfig.title} onChange={(event) => setConfig({ ...currentConfig, title: event.target.value })} className="rounded-2xl border border-ink/10 px-4 py-3" />
             </label>
             <label className="grid gap-2">
               <span className="text-sm text-ink/64">Цель</span>
-              <textarea value={config.goal} onChange={(event) => setConfig({ ...config, goal: event.target.value })} className="min-h-28 rounded-2xl border border-ink/10 px-4 py-3" />
+              <textarea value={currentConfig.goal} onChange={(event) => setConfig({ ...currentConfig, goal: event.target.value })} className="min-h-28 rounded-2xl border border-ink/10 px-4 py-3" />
             </label>
             <div className="grid gap-4 md:grid-cols-3">
               <label className="grid gap-2">
                 <span className="text-sm text-ink/64">Неделя</span>
-                <input type="number" value={config.week} onChange={(event) => setConfig({ ...config, week: Number(event.target.value) || 1 })} className="rounded-2xl border border-ink/10 px-4 py-3" />
+                <input type="number" value={currentConfig.week} onChange={(event) => setConfig({ ...currentConfig, week: Number(event.target.value) || 1 })} className="rounded-2xl border border-ink/10 px-4 py-3" />
               </label>
               <label className="grid gap-2">
                 <span className="text-sm text-ink/64">Бейдж</span>
-                <input value={config.badge} onChange={(event) => setConfig({ ...config, badge: event.target.value })} className="rounded-2xl border border-ink/10 px-4 py-3" />
+                <input value={currentConfig.badge} onChange={(event) => setConfig({ ...currentConfig, badge: event.target.value })} className="rounded-2xl border border-ink/10 px-4 py-3" />
               </label>
               <label className="grid gap-2">
                 <span className="text-sm text-ink/64">Slug</span>
-                <input value={config.slug} onChange={(event) => setConfig({ ...config, slug: event.target.value })} className="rounded-2xl border border-ink/10 px-4 py-3" />
+                <input value={currentConfig.slug} onChange={(event) => setConfig({ ...currentConfig, slug: event.target.value })} className="rounded-2xl border border-ink/10 px-4 py-3" />
               </label>
             </div>
             <label className="grid gap-2">
               <span className="text-sm text-ink/64">Рекомендация на 48 часов</span>
-              <textarea value={config.recommendation_48h} onChange={(event) => setConfig({ ...config, recommendation_48h: event.target.value })} className="min-h-24 rounded-2xl border border-ink/10 px-4 py-3" />
+              <textarea value={currentConfig.recommendation_48h} onChange={(event) => setConfig({ ...currentConfig, recommendation_48h: event.target.value })} className="min-h-24 rounded-2xl border border-ink/10 px-4 py-3" />
             </label>
             <div className="flex flex-wrap gap-3 pt-2">
-              <button type="button" onClick={() => saveCurrent(config)} className="rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white">
+              <button type="button" onClick={() => saveCurrent(currentConfig)} className="rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white">
                 Сохранить
               </button>
-              <button type="button" onClick={() => downloadText(`${config.slug}.json`, toPrettyJson(config), "application/json")} className="rounded-full border border-ink/10 px-5 py-3 text-sm font-semibold text-ink">
+              <button type="button" onClick={() => downloadText(`${currentConfig.slug}.json`, toPrettyJson(currentConfig), "application/json")} className="rounded-full border border-ink/10 px-5 py-3 text-sm font-semibold text-ink">
                 Экспорт JSON
               </button>
               <button type="button" onClick={duplicateTemplate} className="rounded-full border border-ink/10 px-5 py-3 text-sm font-semibold text-ink">
@@ -160,7 +162,7 @@ export function AdminEditor({ slug }: AdminEditorProps) {
         <section className="rounded-[30px] border border-ink/8 bg-white p-3 shadow-panel">
           <div className="rounded-[24px] bg-mist/35 p-3">
             <p className="px-3 pt-2 text-xs uppercase tracking-[0.2em] text-pine/70">Preview</p>
-            <ExercisePlayer slug={config.slug} embed previewConfig={config} />
+            <ExercisePlayer slug={currentConfig.slug} embed previewConfig={currentConfig} />
           </div>
         </section>
       </div>
