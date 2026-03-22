@@ -71,9 +71,10 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
     );
   }
 
-  const result = scoreExercise(config, answers, streak);
+  const currentConfig = config;
+  const result = scoreExercise(currentConfig, answers, streak);
   const completedCount = Object.values(answers).filter(Boolean).length;
-  const progressPercent = Math.round((completedCount / config.steps.length) * 100);
+  const progressPercent = Math.round((completedCount / currentConfig.steps.length) * 100);
 
   function setAnswer(stepId: string, value: UserStepAnswer["value"]) {
     setAnswers((current) => ({ ...current, [stepId]: value }));
@@ -82,44 +83,50 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
   function submit() {
     setResultOpen(true);
     const seconds = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
-    const progress = saveProgress(config.slug, answers, result.score, result.completed, result.artifactText);
+    const progress = saveProgress(
+      currentConfig.slug,
+      answers,
+      result.score,
+      result.completed,
+      result.artifactText
+    );
     setStreak(progress?.streak ?? streak);
-    const firstIncomplete = config.steps.find((step) => !answers[step.id]);
+    const firstIncomplete = currentConfig.steps.find((step) => !answers[step.id]);
 
     trackEvent({
       type: "completed",
-      slug: config.slug,
+      slug: currentConfig.slug,
       at: new Date().toISOString(),
       payload: { score: result.score, completed: result.completed }
     });
     trackEvent({
       type: "avg_score",
-      slug: config.slug,
+      slug: currentConfig.slug,
       at: new Date().toISOString(),
       payload: { score: result.score }
     });
     trackEvent({
       type: "avg_time",
-      slug: config.slug,
+      slug: currentConfig.slug,
       at: new Date().toISOString(),
       payload: { seconds }
     });
     trackEvent({
       type: "common_errors",
-      slug: config.slug,
+      slug: currentConfig.slug,
       at: new Date().toISOString(),
       payload: { errors: result.commonErrors }
     });
     trackEvent({
       type: "recommendation_hits",
-      slug: config.slug,
+      slug: currentConfig.slug,
       at: new Date().toISOString(),
       payload: { recommendation: result.recommendation }
     });
     if (firstIncomplete) {
       trackEvent({
         type: "drop_step",
-        slug: config.slug,
+        slug: currentConfig.slug,
         at: new Date().toISOString(),
         payload: { stepId: firstIncomplete.id, title: firstIncomplete.title }
       });
@@ -132,23 +139,23 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
         <div className={cn("grid gap-10", embed ? "p-6" : "p-8 lg:grid-cols-[1.1fr_0.9fr] lg:p-10")}>
           <div>
             <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.24em] text-pine/70">
-              <span>Неделя {config.week}</span>
-              <span>{formatFocus(config.ybt_focus)}</span>
-              <span>{config.duration_min} мин</span>
+              <span>Неделя {currentConfig.week}</span>
+              <span>{formatFocus(currentConfig.ybt_focus)}</span>
+              <span>{currentConfig.duration_min} мин</span>
             </div>
             <h1 className="mt-4 max-w-3xl font-serif text-4xl leading-tight text-ink md:text-5xl">
-              {config.title}
+              {currentConfig.title}
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-ink/72">{config.goal}</p>
-            <p className="mt-5 max-w-2xl text-sm leading-6 text-ink/64">{config.content.intro}</p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-ink/72">{currentConfig.goal}</p>
+            <p className="mt-5 max-w-2xl text-sm leading-6 text-ink/64">{currentConfig.content.intro}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <span className="rounded-full border border-pine/20 bg-white/80 px-4 py-2 text-sm text-ink">
-                Бейдж: {config.badge}
+                Бейдж: {currentConfig.badge}
               </span>
               <span className="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-sm text-ink">
-                Уровень: {config.level}
+                Уровень: {currentConfig.level}
               </span>
-              {config.mode === "checkin" ? (
+              {currentConfig.mode === "checkin" ? (
                 <span className="rounded-full border border-rust/20 bg-rust/10 px-4 py-2 text-sm text-ink">
                   Серия: {streak} дней
                 </span>
@@ -160,7 +167,7 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
                   Ко всем упражнениям
                 </Link>
                 <Link
-                  href={`/exercise/${config.slug}?embed=1`}
+                  href={`/exercise/${currentConfig.slug}?embed=1`}
                   className="underline decoration-clay underline-offset-4"
                 >
                   Открыть embed-ссылку
@@ -178,7 +185,7 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
               <div className="h-2 rounded-full bg-pine transition-all" style={{ width: `${progressPercent}%` }} />
             </div>
             <div className="mt-6 space-y-3">
-              {config.steps.map((step, index) => (
+              {currentConfig.steps.map((step, index) => (
                 <div key={step.id} className="rounded-2xl border border-ink/8 px-4 py-3">
                   <div className="flex items-center justify-between gap-4">
                     <p className="text-sm font-medium text-ink">
@@ -205,7 +212,7 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
       ) : null}
 
       <section className="mt-8 space-y-5">
-        {config.steps.map((step, index) => {
+        {currentConfig.steps.map((step, index) => {
           const value = answers[step.id];
 
           return (
@@ -373,7 +380,13 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
         </button>
         <button
           type="button"
-          onClick={() => downloadText(`${config.slug}.json`, JSON.stringify(answers, null, 2), "application/json")}
+          onClick={() =>
+            downloadText(
+              `${currentConfig.slug}.json`,
+              JSON.stringify(answers, null, 2),
+              "application/json"
+            )
+          }
           className="rounded-full border border-ink/10 bg-white px-6 py-3 text-sm font-semibold text-ink"
         >
           Экспорт ответов
@@ -433,12 +446,18 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
                 </div>
               ) : null}
               <div className="mt-5 flex flex-wrap gap-3">
-                <button type="button" onClick={() => downloadText(`${config.slug}-result.txt`, result.artifactText)} className="rounded-full bg-pine px-5 py-3 text-sm font-semibold text-white">
+                <button type="button" onClick={() => downloadText(`${currentConfig.slug}-result.txt`, result.artifactText)} className="rounded-full bg-pine px-5 py-3 text-sm font-semibold text-white">
                   Скачать результат
                 </button>
                 <button
                   type="button"
-                  onClick={() => downloadText(`${config.slug}-result.html`, `<html><body><pre>${result.artifactText}</pre></body></html>`, "text/html")}
+                  onClick={() =>
+                    downloadText(
+                      `${currentConfig.slug}-result.html`,
+                      `<html><body><pre>${result.artifactText}</pre></body></html>`,
+                      "text/html"
+                    )
+                  }
                   className="rounded-full border border-ink/10 bg-white px-5 py-3 text-sm font-semibold text-ink"
                 >
                   Скачать HTML
@@ -449,8 +468,8 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
         </section>
       ) : null}
 
-      {!embed && isNonEmptyText(config.content.outro) ? (
-        <p className="mt-8 text-sm leading-6 text-ink/60">{config.content.outro}</p>
+      {!embed && isNonEmptyText(currentConfig.content.outro) ? (
+        <p className="mt-8 text-sm leading-6 text-ink/60">{currentConfig.content.outro}</p>
       ) : null}
     </div>
   );
