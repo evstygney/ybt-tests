@@ -147,7 +147,7 @@ export function scoreExercise(
     badge: config.badge,
     reflectionPrompt: config.reflection_prompt,
     recommendation: firstMatchedRule?.recommendation ?? config.recommendation_48h,
-    48hAction: config.recommendation_48h,
+    "48hAction": config.recommendation_48h,
     weeklyExperiment: config.micro_experiment_prompt,
     metrics,
     summary: firstMatchedRule?.message ?? config.summary,
