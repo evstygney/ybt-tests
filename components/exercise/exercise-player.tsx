@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getBaseExercises, mergeExercises } from "@/lib/catalog";
 import { scoreExercise } from "@/lib/engine/scoring";
@@ -33,15 +32,22 @@ function resolveConfig(slug: string, previewConfig?: ExerciseConfig): ExerciseCo
 }
 
 export function ExercisePlayer({ slug, embed = false, previewConfig }: ExercisePlayerProps) {
-  const searchParams = useSearchParams();
   const [config, setConfig] = useState<ExerciseConfig | undefined>(previewConfig);
   const [answers, setAnswers] = useState<Record<string, UserStepAnswer["value"]>>({});
   const [startedAt, setStartedAt] = useState<number>(Date.now());
   const [resultOpen, setResultOpen] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [streak, setStreak] = useState(0);
+  const [isEmbed, setIsEmbed] = useState(embed);
 
-  const isEmbed = embed || searchParams.get("embed") === "1";
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const query = new URLSearchParams(window.location.search);
+    setIsEmbed(embed || query.get("embed") === "1");
+  }, [embed]);
 
   useEffect(() => {
     const nextConfig = resolveConfig(slug, previewConfig);
