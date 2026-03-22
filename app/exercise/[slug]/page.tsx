@@ -8,13 +8,10 @@ export function generateStaticParams() {
 }
 
 export default async function ExercisePage({
-  params,
-  searchParams
+  params
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ embed?: string }>;
 }) {
   const { slug } = await params;
-  const query = await searchParams;
-  return <ExercisePlayer slug={slug} embed={query.embed === "1"} />;
+  return <ExercisePlayer slug={slug} />;
 }

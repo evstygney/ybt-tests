@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getBaseExercises, mergeExercises } from "@/lib/catalog";
 import { scoreExercise } from "@/lib/engine/scoring";
@@ -32,12 +33,15 @@ function resolveConfig(slug: string, previewConfig?: ExerciseConfig): ExerciseCo
 }
 
 export function ExercisePlayer({ slug, embed = false, previewConfig }: ExercisePlayerProps) {
+  const searchParams = useSearchParams();
   const [config, setConfig] = useState<ExerciseConfig | undefined>(previewConfig);
   const [answers, setAnswers] = useState<Record<string, UserStepAnswer["value"]>>({});
   const [startedAt, setStartedAt] = useState<number>(Date.now());
   const [resultOpen, setResultOpen] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [streak, setStreak] = useState(0);
+
+  const isEmbed = embed || searchParams.get("embed") === "1";
 
   useEffect(() => {
     const nextConfig = resolveConfig(slug, previewConfig);
@@ -56,9 +60,9 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
       type: "started",
       slug: nextConfig.slug,
       at: new Date().toISOString(),
-      payload: { embed }
+      payload: { embed: isEmbed }
     });
-  }, [slug, previewConfig, embed]);
+  }, [slug, previewConfig, isEmbed]);
 
   if (!config) {
     return (
@@ -134,9 +138,9 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
   }
 
   return (
-    <div className={cn("mx-auto w-full max-w-6xl", embed ? "py-4" : "py-10")}>
+    <div className={cn("mx-auto w-full max-w-6xl", isEmbed ? "py-4" : "py-10")}>
       <section className="overflow-hidden rounded-[36px] border border-white/60 bg-[linear-gradient(135deg,#f9fbf8_0%,#eef2ea_45%,#f6f1ea_100%)] shadow-panel">
-        <div className={cn("grid gap-10", embed ? "p-6" : "p-8 lg:grid-cols-[1.1fr_0.9fr] lg:p-10")}>
+        <div className={cn("grid gap-10", isEmbed ? "p-6" : "p-8 lg:grid-cols-[1.1fr_0.9fr] lg:p-10")}>
           <div>
             <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.24em] text-pine/70">
               <span>Неделя {currentConfig.week}</span>
@@ -161,7 +165,7 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
                 </span>
               ) : null}
             </div>
-            {!embed ? (
+            {!isEmbed ? (
               <div className="mt-8 flex flex-wrap gap-4 text-sm text-ink/66">
                 <Link href="/" className="underline decoration-clay underline-offset-4">
                   Ко всем упражнениям
@@ -468,7 +472,7 @@ export function ExercisePlayer({ slug, embed = false, previewConfig }: ExerciseP
         </section>
       ) : null}
 
-      {!embed && isNonEmptyText(currentConfig.content.outro) ? (
+      {!isEmbed && isNonEmptyText(currentConfig.content.outro) ? (
         <p className="mt-8 text-sm leading-6 text-ink/60">{currentConfig.content.outro}</p>
       ) : null}
     </div>
