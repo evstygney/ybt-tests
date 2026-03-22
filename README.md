@@ -6,6 +6,7 @@ Next.js-приложение с единым движком микротрена
 
 - `app/` — маршруты каталога, пользовательских упражнений и админки.
 - `data/exercises/` — JSON-конфиги упражнений и JSON Schema.
+- `docs/TEST_CATALOG.md` — подробное описание каждого упражнения: цель, механика, результат и применение в курсе.
 - `components/exercise/` — универсальный player и каталог.
 - `components/admin/` — dashboard, редактор, preview.
 - `lib/engine/` — rule-based scoring.
@@ -29,6 +30,10 @@ Next.js-приложение с единым движком микротрена
 - Прогресс, streak и артефакты в `localStorage`.
 - Локальная аналитика событий `started/completed/avg_time/avg_score/common_errors/recommendation_hits`.
 - Импорт/экспорт JSON, preview, raw JSON mode.
+
+## Описание упражнений
+
+Подробный справочник по каждому модулю лежит в [docs/TEST_CATALOG.md](/C:/Users/evstygney/Documents/еще%20один%20проект/docs/TEST_CATALOG.md).
 
 ## Запуск
 
